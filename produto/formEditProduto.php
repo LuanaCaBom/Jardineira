@@ -1,28 +1,24 @@
 <?php
     require '../scripts/init.php';
 
-    $id = isset($_GET['id']) ? (int) $_GET['id'] : null;
+    $Id = isset($_GET['Id']) ? (int) $_GET['Id'] : null;
 
-    if (empty($id)) {
+    if (empty($Id)) {
         header('Location: ../msgErro.html');
         exit;
     }
 
     $PDO = db_connect();
-    $sqlLivro = "SELECT id, titulo, autor, sessao_id FROM livro WHERE id = :id";
-    $stmtLivro = $PDO->prepare($sqlLivro);
-    $stmtLivro->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmtLivro->execute();
-    $livro = $stmtLivro->fetch(PDO::FETCH_ASSOC);
+    $sqlProduto = "SELECT Id, Nome, Valor, Tipo FROM Produto WHERE Id = :Id";
+    $stmtProduto = $PDO->prepare($sqlProduto);
+    $stmtProduto->bindParam(':Id', $Id, PDO::PARAM_INT);
+    $stmtProduto->execute();
+    $Produto = $stmtProduto->fetch(PDO::FETCH_ASSOC);
 
-    if (!is_array($livro)) {
+    if (!is_array($Produto)) {
         header('Location: ../msgErro.html');
         exit;
     }
-
-    $sqlSessao = "SELECT id, descricao FROM sessao ORDER BY descricao ASC";
-    $stmtSessao = $PDO->prepare($sqlSessao);
-    $stmtSessao->execute();
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +27,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteca</title>
+    <title>Jardineira</title>
     <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
     <script src="../bootstrap/js/popper.min.js"></script>
     <script src="../bootstrap/js/bootstrap.js"></script>
@@ -43,40 +39,32 @@
     </script>
 </head>
 <body>
-    <div class="container">
-        <div id="menu"></div>
-    </div>
+    <div id="menu"></div>
 
     <div class="container">
         <div class="jumbotron">
-            <p class="h3 text-center">Editar livro</p>
+            <p class="h3 text-center">Editar Produto</p>
         </div>
     </div>
 
     <div class="container">
-        <form action="editLivro.php" method="post">
+        <form action="editProduto.php" method="post">
             <div class="form-group">
-                <label for="titulo">Título:</label>
-                <input type="text" class="form-control" name="titulo" id="titulo" required minlength="5" value="<?php echo $livro['titulo']; ?>">
+                <label for="Nome">Nome:</label>
+                <input type="text" class="form-control" name="Nome" id="Nome" required minlength="5" value="<?php echo $Produto['Nome']; ?>">
             </div>
 
             <div class="form-group">
-                <label for="autor">Autor:</label>
-                <input type="text" class="form-control" name="autor" id="autor" required minlength="5" value="<?php echo $livro['autor']; ?>">
+                <label for="Valor">Valor:</label>
+                <input type="number" class="form-control" name="Valor" id="Valor" required minlength="5" value="<?php echo $Produto['Valor']; ?>">
             </div>
 
             <div class="form-group">
-                <label for="sessao">Selecione a sessão do livro</label>
-                <select class="form-control" name="sessao" id="sessao" required>
-                    <?php while ($dados = $stmtSessao->fetch(PDO::FETCH_ASSOC)): ?>
-                        <option value="<?php echo $dados['id']; ?>" <?php echo ($dados['id'] == $livro['sessao_id']) ? 'selected' : ''; ?>>
-                            <?php echo $dados['descricao']; ?>
-                        </option>
-                    <?php endwhile; ?>
-                </select>
+                <label for="Tipo">Tipo:</label>
+                <input type="text" class="form-control" name="Tipo" id="Tipo" required minlength="5" value="<?php echo $Produto['Tipo']; ?>">
             </div>
 
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
+            <input type="hidden" name="Id" value="<?php echo $Id; ?>">
             <button type="submit" class="btn btn-primary">Enviar</button>
             <a class="btn btn-danger" href="../index.html">Cancelar</a>
         </form>

@@ -1,23 +1,23 @@
 <?php
     require_once '../scripts/init.php';
 
-    $id = isset($_POST['id']) ? $_POST['id'] : null;
-    $titulo = isset($_POST['titulo']) ? $_POST['titulo'] : null;
-    $autor = isset($_POST['autor']) ? $_POST['autor'] : null;
-    $sessao = isset($_POST['sessao']) ? $_POST['sessao'] : null;
+    $Id = isset($_POST['Id']) ? $_POST['Id'] : null;
+    $Nome = isset($_POST['Nome']) ? $_POST['Nome'] : null;
+    $Valor = isset($_POST['Valor']) ? $_POST['Valor'] : null;
+    $Tipo = isset($_POST['Tipo']) ? $_POST['Tipo'] : null;
 
-    if (empty($id) || empty($titulo) || empty($autor) || empty($sessao)) {
+    if (empty($Id) || empty($Nome) || empty($Valor) || empty($Tipo)) {
         header('Location: ../msg/msgErro.html');
         exit;
     }
 
     $PDO = db_connect();
-    $sql = "UPDATE livro SET titulo = :titulo, autor = :autor, sessao_id = :sessao_id WHERE id = :id";
+    $sql = "UPDATE Produto SET Nome = :Nome, Valor = :Valor, Tipo = :Tipo WHERE Id = :Id";
     $stmt = $PDO->prepare($sql);
-    $stmt->bindParam(':titulo', $titulo);
-    $stmt->bindParam(':autor', $autor);
-    $stmt->bindParam(':sessao_id', $sessao);
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->bindParam(':Nome', $Nome);
+    $stmt->bindParam(':Valor', $Valor);
+    $stmt->bindParam(':Tipo', $Tipo);
+    $stmt->bindParam(':Id', $Id, PDO::PARAM_INT);
 
     if ($stmt->execute()) {
         header('Location: ../msg/msgSucesso.html');
