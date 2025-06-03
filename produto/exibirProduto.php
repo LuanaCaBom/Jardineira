@@ -49,12 +49,12 @@ $stmt->execute();
                 <?php while ($dados = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
                     <th scope="row"><?php echo $dados['Id']; ?></th>
-                    <td><?php echo ($dados['Nome']); ?></td>
+                    <td><?php echo $dados['Nome']; ?></td>
                     <td><?php echo $dados['Valor']; ?></td>
-                    <td><?php echo ($dados['Tipo']); ?></td>
+                    <td><?php echo $dados['Tipo']; ?></td>
                     <td>
-                        <a class="btn btn-info" href="formEditProduto.php?id=<?php echo $dados['Id']; ?>">Editar</a>
-                        <a class="btn btn-danger" href="deleteProduto.php?id=<?php echo $dados['Id']; ?>" onclick="return confirm('Tem certeza de que deseja remover?');">Remover</a>
+                        <a class="btn btn-info" href="formEditProduto.php?Id=<?php echo $dados['Id']; ?>">Editar</a>
+                        <a class="btn btn-danger" href="deleteProduto.php?Id=<?php echo $dados['Id']; ?>" onclick="return confirm('Tem certeza de que deseja remover?');">Remover</a>
                     </td>
                 </tr>
                 <?php endwhile; ?>
