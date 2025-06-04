@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 14, 2025 at 08:24 AM
--- Server version: 8.0.41-0ubuntu0.22.04.1
--- PHP Version: 8.3.16
+-- Tempo de geração: 04/06/2025 às 16:52
+-- Versão do servidor: 8.0.41-0ubuntu0.22.04.1
+-- Versão do PHP: 8.3.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `Jardineira`
+-- Banco de dados: `Jardineira`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Cliente`
+-- Estrutura para tabela `Cliente`
 --
 
 CREATE TABLE `Cliente` (
@@ -35,23 +35,30 @@ CREATE TABLE `Cliente` (
   `Telefone` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Despejando dados para a tabela `Cliente`
+--
+
+INSERT INTO `Cliente` (`Id`, `Nome`, `Email`, `Endereco`, `Telefone`) VALUES
+(2, 'bsdgb', 'adfgasg@ughdv.lkdj', 'afgjswej', '166949849486');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Compra`
+-- Estrutura para tabela `Compra`
 --
 
 CREATE TABLE `Compra` (
   `Id` int NOT NULL,
   `DataHora` datetime NOT NULL,
   `IdCliente` int NOT NULL,
-  `StatusPagamento` char(1) NOT NULL
+  `StatusPagamento` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Estoque`
+-- Estrutura para tabela `Estoque`
 --
 
 CREATE TABLE `Estoque` (
@@ -65,7 +72,7 @@ CREATE TABLE `Estoque` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Pedido`
+-- Estrutura para tabela `Pedido`
 --
 
 CREATE TABLE `Pedido` (
@@ -77,7 +84,7 @@ CREATE TABLE `Pedido` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Produto`
+-- Estrutura para tabela `Produto`
 --
 
 CREATE TABLE `Produto` (
@@ -88,31 +95,38 @@ CREATE TABLE `Produto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Indexes for dumped tables
+-- Despejando dados para a tabela `Produto`
+--
+
+INSERT INTO `Produto` (`Id`, `Nome`, `Valor`, `Tipo`) VALUES
+(1, 'Djamba', 30, 'Remédio');
+
+--
+-- Índices para tabelas despejadas
 --
 
 --
--- Indexes for table `Cliente`
+-- Índices de tabela `Cliente`
 --
 ALTER TABLE `Cliente`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `Compra`
+-- Índices de tabela `Compra`
 --
 ALTER TABLE `Compra`
   ADD PRIMARY KEY (`Id`),
   ADD KEY `fkCliente` (`IdCliente`);
 
 --
--- Indexes for table `Estoque`
+-- Índices de tabela `Estoque`
 --
 ALTER TABLE `Estoque`
   ADD PRIMARY KEY (`Id`),
   ADD KEY `fkProdutoE` (`IdProduto`);
 
 --
--- Indexes for table `Pedido`
+-- Índices de tabela `Pedido`
 --
 ALTER TABLE `Pedido`
   ADD PRIMARY KEY (`Id`),
@@ -120,63 +134,63 @@ ALTER TABLE `Pedido`
   ADD KEY `fkProduto` (`IdProduto`);
 
 --
--- Indexes for table `Produto`
+-- Índices de tabela `Produto`
 --
 ALTER TABLE `Produto`
   ADD PRIMARY KEY (`Id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
--- AUTO_INCREMENT for table `Cliente`
+-- AUTO_INCREMENT de tabela `Cliente`
 --
 ALTER TABLE `Cliente`
-  MODIFY `Id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `Compra`
+-- AUTO_INCREMENT de tabela `Compra`
 --
 ALTER TABLE `Compra`
   MODIFY `Id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `Estoque`
+-- AUTO_INCREMENT de tabela `Estoque`
 --
 ALTER TABLE `Estoque`
   MODIFY `Id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `Pedido`
+-- AUTO_INCREMENT de tabela `Pedido`
 --
 ALTER TABLE `Pedido`
   MODIFY `Id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `Produto`
+-- AUTO_INCREMENT de tabela `Produto`
 --
 ALTER TABLE `Produto`
-  MODIFY `Id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Constraints for dumped tables
+-- Restrições para tabelas despejadas
 --
 
 --
--- Constraints for table `Compra`
+-- Restrições para tabelas `Compra`
 --
 ALTER TABLE `Compra`
   ADD CONSTRAINT `fkCliente` FOREIGN KEY (`IdCliente`) REFERENCES `Cliente` (`Id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints for table `Estoque`
+-- Restrições para tabelas `Estoque`
 --
 ALTER TABLE `Estoque`
   ADD CONSTRAINT `fkProdutoE` FOREIGN KEY (`IdProduto`) REFERENCES `Produto` (`Id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints for table `Pedido`
+-- Restrições para tabelas `Pedido`
 --
 ALTER TABLE `Pedido`
   ADD CONSTRAINT `fkCompra` FOREIGN KEY (`IdCompra`) REFERENCES `Compra` (`Id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
