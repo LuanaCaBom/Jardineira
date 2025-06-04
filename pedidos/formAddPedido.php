@@ -1,17 +1,17 @@
 <?php
 require '../scripts/init.php';
 
-$idEmprestimo = isset($_GET['id']) ? (int) $_GET['id'] : null;
+$IdCompra = isset($_GET['Id']) ? (int) $_GET['Id'] : null;
 
-if (empty($idEmprestimo)) {
+if (empty($IdCompra)) {
     header('Location: ../msg/msgErro.html');
     exit;
 }
 
 $PDO = db_connect();
-$sqlLivros = "SELECT id, titulo FROM livro ORDER BY titulo ASC";
-$stmtLivros = $PDO->prepare($sqlLivros);
-$stmtLivros->execute();
+$sqlProduto = "SELECT Id, Nome FROM Produto ORDER BY Nome ASC";
+$stmtProduto = $PDO->prepare($sqlProduto);
+$stmtProduto->execute();
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ $stmtLivros->execute();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteca</title>
+    <title>Jardineira</title>
     <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
     <script src="../bootstrap/js/popper.min.js"></script>
     <script src="../bootstrap/js/bootstrap.js"></script>
@@ -32,28 +32,26 @@ $stmtLivros->execute();
     </script>
 </head>
 <body>
-    <div class="container">
-        <div id="menu"></div>
-    </div>
+    <div id="menu"></div>
 
     <div class="container">
         <div class="jumbotron">
-            <p class="h3 text-center">Cadastro de empréstimo de livros</p>
+            <p class="h3 text-center">Fazer Pedido</p>
         </div>
     </div>
 
     <div class="container">
-        <form action="addLivroEmprestimo.php" method="post">
+        <form action="addPedido.php" method="post">
             <div class="form-group">
-                <label for="livro">Selecione o livro</label>
-                <select class="form-control" name="livro" id="livro" required>
-                    <?php while ($dados = $stmtLivros->fetch(PDO::FETCH_ASSOC)): ?>
-                        <option value="<?php echo $dados['id']; ?>"><?php echo $dados['titulo']; ?></option>
+                <label for="Produto">Selecione o produto</label>
+                <select class="form-control" name="Produto" id="Produto" required>
+                    <?php while ($dados = $stmtProduto->fetch(PDO::FETCH_ASSOC)): ?>
+                        <option value="<?php echo $dados['Id']; ?>"><?php echo $dados['Nome']; ?></option>
                     <?php endwhile; ?>
                 </select>
             </div>
 
-            <input type="hidden" name="idEmprestimo" value="<?php echo $idEmprestimo; ?>">
+            <input type="hidden" name="IdCompra" value="<?php echo $IdCompra; ?>">
             <button type="submit" class="btn btn-primary">Enviar</button>
             <a class="btn btn-danger" href="../index.html">Cancelar</a>
         </form>

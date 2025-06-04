@@ -2,9 +2,9 @@
 require_once '../scripts/init.php';
 
 $PDO = db_connect();
-$sql = "SELECT C.Id, C.DataHora, C.StatusPagamento, CL.Nome 
+$sql = "SELECT C.Id, C.DataHora, C.StatusPagamento, Cl.Nome 
         FROM Compra AS C 
-        INNER JOIN Cliente AS CL ON C.IdCliente = CL.Id 
+        INNER JOIN Cliente AS Cl ON C.IdCliente = Cl.Id 
         ORDER BY C.Id DESC";
 $stmt = $PDO->prepare($sql);
 $stmt->execute();
@@ -16,7 +16,7 @@ $stmt->execute();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteca</title>
+    <title>Jardineira</title>
     <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
     <script src="../bootstrap/js/popper.min.js"></script>
     <script src="../bootstrap/js/bootstrap.js"></script>
@@ -28,13 +28,11 @@ $stmt->execute();
     </script>
 </head>
 <body>
-    <div class="container">
-        <div id="menu"></div>
-    </div>
+    <div id="menu"></div>
 
     <div class="container">
         <div class="jumbotron">
-            <p class="h3 text-center">Empréstimos cadastrados</p>
+            <p class="h3 text-center">Compras Realizadas</p>
         </div>
     </div>
 
@@ -43,24 +41,24 @@ $stmt->execute();
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Data do empréstimo</th>
-                    <th scope="col">Usuário</th>
-                    <th scope="col">Data da devolução</th>
-                    <th scope="col">Ações</th>
+                    <th scope="col">Data e Hora da Compra</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Status do Pagamento</th>
+                    <th scope="col">Opções</th>
                 </tr>
             </thead>
             <tbody>
                 <?php while ($dados = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
-                    <th scope="row"><?php echo $dados['id']; ?></th>
-                    <td><?php echo dateConvert($dados['dataEmprestimo']); ?></td>
-                    <td><?php echo $dados['nome']; ?></td>
-                    <td><?php echo dateConvert($dados['dataDevolucao']); ?></td>
+                    <th scope="row"><?php echo $dados['Id']; ?></th>
+                    <td><input type="datetime-local" readonly value="<?php echo $dados['DataHora']; ?>"></td>
+                    <td><?php echo $dados['Nome']; ?></td>
+                    <td><?php echo $dados['StatusPagamento']; ?></td>
                     <td>
-                        <a class="btn btn-primary" href="../livroEmprestimo/formAddLivroEmprestimo.php?id=<?php echo $dados['id']; ?>">Adicionar Livro</a>
-                        <a class="btn btn-secondary" href="../livroEmprestimo/exibirLivrosEmprestimo.php?id=<?php echo $dados['id']; ?>">Ver Livros</a>
-                        <a class="btn btn-info" href="formEditEmprestimo.php?id=<?php echo $dados['id']; ?>">Editar</a>
-                        <a class="btn btn-danger" href="deleteEmprestimo.php?id=<?php echo $dados['id']; ?>" onclick="return confirm('Tem certeza de que deseja remover?');">Remover</a>
+                        <a class="btn btn-primary" href="../pedidos/formAddPedido.php?Id=<?php echo $dados['Id']; ?>">Adicionar Produtos</a>
+                        <a class="btn btn-secondary" href="../pedidos/exibirPedido.php?Id=<?php echo $dados['Id']; ?>">Ver Produtos</a>
+                        <a class="btn btn-info" href="formEditCompra.php?Id=<?php echo $dados['Id']; ?>">Editar</a>
+                        <a class="btn btn-danger" href="deleteCompra.php?Id=<?php echo $dados['Id']; ?>" onclick="return confirm('Tem certeza de que deseja remover?');">Remover</a>
                     </td>
                 </tr>
                 <?php endwhile; ?>

@@ -1,35 +1,24 @@
 <?php
-require_once '../scripts/init.php';
+    require_once '../scripts/init.php';
 
-$id = isset($_GET['id']) ? $_GET['id'] : null;
+    $Id = isset($_GET['Id']) ? $_GET['Id'] : null;
 
-if (empty($id)) {
-    header('Location: ../msg/msgErro.html');
-    exit;
-}
+    if (empty($Id)) {
+        header('Location: ../msg/msgErro.html');
+        exit;
+    }
 
-$PDO = db_connect();
-
-// Verificar se existe algum livro para esta sessão
-$sqlLivro = "SELECT COUNT(*) AS total FROM livro WHERE sessao_id = :id";
-$stmtLivro = $PDO->prepare($sqlLivro);
-$stmtLivro->bindParam(':id', $id, PDO::PARAM_INT);
-$stmtLivro->execute();
-$total = $stmtLivro->fetchColumn();
-
-if ($total > 0) {
-    header('Location: ../msg/msgErro.html');
-    exit;
-} else {
-    $sql = "DELETE FROM sessao WHERE id = :id";
+    $PDO = db_connect();
+    $stmtPedido->execute();
     $stmt = $PDO->prepare($sql);
+    $sql = "DELETE FROM Pedido WHERE Id = :Id";
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    
+
     if ($stmt->execute()) {
-        header('Location: ../msg/msgSucesso.html');
+        header('Location: ../msg/msgSucessoCompra.html');
     } else {
         header('Location: ../msg/msgErro.html');
     }
     exit;
-}
+
 ?>

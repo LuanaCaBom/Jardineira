@@ -48,7 +48,7 @@
     </div>
 
     <div class="container">
-        <form action="editProduto.php" method="post">
+        <form action="editCliente.php" method="post">
             <div class="form-group">
                 <label for="Nome">Nome:</label>
                 <input type="text" class="form-control" name="Nome" id="Nome" required minlength="5" value="<?php echo $Cliente['Nome']; ?>">

@@ -1,24 +1,24 @@
 <?php
-    require_once '../scripts/init.php';
+require_once '../scripts/init.php';
 
-    $dataEmprestimo = isset($_POST['dataEmprestimo']) ? $_POST['dataEmprestimo'] : null;
-    $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : null;
+$DataHora = isset($_POST['DataHora']) ? $_POST['DataHora'] : null;
+$Cliente = isset($_POST['Cliente']) ? $_POST['Cliente'] : null;
 
-    if (empty($dataEmprestimo) || empty($usuario)) {
-        header('Location: ../msg/msgErro.html');
-        exit;
-    }
-
-    $PDO = db_connect();
-    $sql = "INSERT INTO emprestimo (dataEmprestimo, usuario_id) VALUES (:dataEmprestimo, :usuario)";
-    $stmt = $PDO->prepare($sql);
-    $stmt->bindParam(':dataEmprestimo', $dataEmprestimo);
-    $stmt->bindParam(':usuario', $usuario);
-
-    if ($stmt->execute()) {
-        header('Location: ../msg/msgSucessoEmprestimo.html');
-    } else {
-        header('Location: ../msg/msgErro.html');
-    }
+if (empty($DataHora) || empty($Cliente)) {
+    header('Location: ../msg/msgErro.html');
     exit;
+}
+
+$PDO = db_connect();
+$sql = "INSERT INTO Compra (DataHora, IdCliente) VALUES (:DataHora, :Cliente)";
+$stmt = $PDO->prepare($sql);
+$stmt->bindParam(':DataHora', $DataHora);
+$stmt->bindParam(':Cliente', $Cliente);
+
+if ($stmt->execute()) {
+    header('Location: ../msg/msgSucessoCompra.html');
+} else {
+    header('Location: ../msg/msgErro.html');
+}
+exit;
 ?>

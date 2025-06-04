@@ -11,5 +11,10 @@
         }
     }
 
+    function converteData($date) {
+        $dataCorrigida = implode('/', array_reverse(explode('-', $date)));
+        return $dataCorrigida;
+    }    
+
 ?>
 
