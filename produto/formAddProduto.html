@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jardineira</title>
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="../bootstrap/js/popper.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.js"></script>
+    <script src="../bootstrap/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#menu").load("../navbar/navbar.html");
+        });
+    </script>
+</head>
+<body>
+    <div id="menu"></div>
+    
+    <div class="container">
+        <div class="jumbotron">
+            <p class="h3 text-center">Cadastro de Produtos</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <form action="addProduto.php" method="post">
+            <div class="form-group">
+                <label for="Nome">Nome:</label>
+                <input type="text" class="form-control" name="Nome" id="Nome" required minlength="3" placeholder="Informe o nome do produto">
+            </div>
+
+            <div class="form-group">
+                <label for="Valor">Valor:</label>
+                <input type="number" class="form-control" name="Valor" id="Valor" required minlength="4" placeholder="Informe o valor do produto">
+            </div>
+
+            <div class="form-group">
+                <label for="Tipo">Tipo:</label>
+                <input type="text" class="form-control" name="Tipo" id="Tipo" required minlength="3" placeholder="Informe o tipo do produto">
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="submit">Enviar</button>
+            <a class="btn btn-danger" href="../index.html">Cancelar</a>
+        </form>
+    </div>
+
+    <div class="container">
+        <div class="card-footer">
+            <p class="h6 text-center">Todos os direitos reservados &copy; Copyright</p>
+        </div>
+    </div>
+</body>
+</html>
