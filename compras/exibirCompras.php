@@ -52,8 +52,8 @@ $stmt->execute();
                 <tr>
                     <th scope="row"><?php echo $dados['Id']; ?></th>
                     <td><input type="datetime-local" readonly value="<?php echo $dados['DataHora']; ?>"></td>
-                    <td><?php echo $dados['StatusPagamento']; ?></td>
                     <td><?php echo $dados['Nome']; ?></td>
+                    <td><?php echo $dados['StatusPagamento']; ?></td>
                     <td>
                         <a class="btn btn-primary" href="../pedidos/formAddPedido.php?Id=<?php echo $dados['Id']; ?>">Adicionar Produtos</a>
                         <a class="btn btn-secondary" href="../pedidos/exibirPedido.php?Id=<?php echo $dados['Id']; ?>">Ver Produtos</a>

@@ -2,7 +2,7 @@
 require_once '../scripts/init.php';
 
 $PDO = db_connect();
-$sql = "SELECT Id, Nome FROM Cliente ORDER BY Nome ASC";
+$sql = "SELECT Id, Nome, Tipo FROM Produto ORDER BY Tipo ASC";
 $stmt = $PDO->prepare($sql);
 $stmt->execute();
 ?>
@@ -29,35 +29,36 @@ $stmt->execute();
     
     <div class="container">
         <div class="jumbotron">
-            <p class="h3 text-center">Comprar Produtos</p>
+            <p class="h3 text-center">Cadastrar Estoque</p>
         </div>
     </div>
 
     <div class="container">
-        <form action="addCompra.php" method="post">
+        <form action="addEstoque.php" method="post">
             <div class="form-group">
-                <label for="DataHora">Data e hora:</label>
-                <input type="datetime-local" class="form-control" name="DataHora" id="DataHora">
-            </div>
-
-            <label for="StatusPagamento">Status do Pagamento:</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="StatusPagamento" id="StatusPagamento" value="Sim">
-                <label class="form-check-label" for="StatusPagamento">Sim</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="StatusPagamento" id="StatusPagamento" value="Não" checked>
-                <label class="form-check-label" for="StatusPagamento">Não</label>
-            </div>
-
-            <div class="form-group">
-                <label for="Cliente">Selecione o cliente</label>
-                <select class="form-control" name="Cliente" id="Cliente" required>
+                <label for="Produto">Selecione o produto:</label>
+                <select class="form-control" name="Produto" id="Produto" required>
                     <?php while ($dados = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-                        <option value="<?php echo $dados['Id']; ?>"><?php echo $dados['Nome']; ?></option>
+                        <option value="<?php echo $dados['Id']; ?>"><?php echo $dados['Tipo'] . " - " . $dados['Nome']; ?></option>
                     <?php endwhile; ?>
                 </select>
             </div>
+
+            <div class="form-group">
+                <label for="Lote">Lote:</label>
+                <input type="number" class="form-control" name="Lote" id="Lote">
+            </div>
+
+            <!-- Perguntar sobre essa quantidade: funcionamento dela na hora da compra -->
+            <div class="form-group">
+                <label for="Quantidade">Quantidade:</label>
+                <input type="number" class="form-control" name="Quantidade" id="Quantidade">
+            </div>
+
+            <div class="form-group">
+                <label for="Localizacao">Localização:</label>
+                <input type="text" class="form-control" name="Localizacao" id="Localizacao">
+            </div>            
 
             <button type="submit" class="btn btn-primary">Enviar</button>
             <a class="btn btn-danger" href="../index.html">Cancelar</a>

@@ -56,7 +56,7 @@
 
             <div class="form-group">
                 <label for="Valor">Valor:</label>
-                <input type="number" class="form-control" name="Valor" id="Valor" required minlength="5" value="<?php echo $Produto['Valor']; ?>">
+                <input type="number" step="0.01" class="form-control" name="Valor" id="Valor" required minlength="5" value="<?php echo $Produto['Valor']; ?>">
             </div>
 
             <div class="form-group">
