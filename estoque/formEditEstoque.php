@@ -9,7 +9,9 @@
     }
 
     $PDO = db_connect();
-    $sql = "SELECT Id, Nome, Tipo FROM Produto ORDER BY Tipo ASC";
+    $sql = "SELECT IdProduto, Localizacao, Quantidade, Lote FROM Produto 
+            INNER JOIN 
+            WHERE Id = :Id ORDER BY Tipo ASC";
     $stmt = $PDO->prepare($sql);
     $stmt->bindParam(':Id', $Id, PDO::PARAM_INT);
     $stmt->execute();
@@ -51,7 +53,7 @@
         <form action="addEstoque.php" method="post">
             <div class="form-group">
                 <label for="Produto">Selecione o produto:</label>
-                <select class="form-control" name="Produto" id="Produto" required>
+                <select class="form-control" name="Produto" id="Produto" value="<?php echo $Estoque['Produto']; ?>" required>
                     <?php while ($dados = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                         <option value="<?php echo $dados['Id']; ?>"><?php echo $dados['Tipo'] . " - " . $dados['Nome']; ?></option>
                     <?php endwhile; ?>
@@ -74,6 +76,7 @@
                 <input type="text" class="form-control" name="Localizacao" id="Localizacao" value="<?php echo $Cliente['Localizacao']; ?>">
             </div>            
 
+            <input type="hidden" name="Id" value="<?php echo $Id; ?>">
             <button type="submit" class="btn btn-primary">Enviar</button>
             <a class="btn btn-danger" href="../index.html">Cancelar</a>
         </form>
