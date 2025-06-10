@@ -32,7 +32,7 @@ $stmt->execute();
 
     <div class="container">
         <div class="jumbotron">
-            <p class="h3 text-center">Estoque</p>
+            <p class="h3 text-center">Estoque cadastrado</p>
         </div>
     </div>
 

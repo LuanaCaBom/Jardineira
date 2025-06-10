@@ -1,0 +1,66 @@
+/* Zerar margens e paddings básicos */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+:root {
+    --black: #000;
+    --white: #fff;
+    --verde: #556B2F;
+    --verde_escuro: #212b13;
+}
+
+.navbar-nav .nav-link,
+.navbar-brand,
+.dropdown-item {
+    color: var(--verde) !important;
+    font-size: 1.2rem;
+}
+
+.navbar-nav .nav-link:hover,
+.dropdown-item:hover {
+    color: #212b13 !important;
+}
+
+
+main{
+    background-color: var(--verde);
+    min-height: calc(100vh - 5rem);
+    background-size: auto;
+}
+
+.content-area {
+min-height: 80vh;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.side-column {
+width: 35%;
+background-color: var(--verde);
+height: 100%;
+min-height: 755px;
+}
+
+.central-image {
+    width: 114%;
+    text-align: center;
+    height: auto;
+}
+
+footer {
+    background-color: var(--white);
+    height: 3rem;
+    color: var(--verde);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.texto-footer {
+    padding-right: 1rem;
+}
