@@ -4,35 +4,36 @@
     $Id = isset($_GET['Id']) ? (int) $_GET['Id'] : null;
 
     if (empty($Id)) {
-        header('Location: ../msgErro.html');
+        header('Location: ../msg/msgErro.html');
         exit;
     }
 
     $PDO = db_connect();
 
-    $sql = "SELECT Id, Nome, Tipo FROM Produto WHERE Id = :Id ORDER BY Tipo ASC";
-    $stmt = $PDO->prepare($sql);
-    $stmt->bindParam(':Id', $Id, PDO::PARAM_INT);
-    $stmt->execute();
-    $Produto = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    $sqlEstoque = "SELECT Id, Localizacao, Quantidade, Lote FROM Estoque WHERE Id = :Id";
+    $sqlEstoque = "SELECT E.Id, E.Localizacao, E.Quantidade, E.Lote, E.IdProduto, P.Nome, P.Tipo 
+                   FROM Estoque AS E 
+                   INNER JOIN Produto AS P ON E.IdProduto = P.Id 
+                   WHERE E.Id = :Id";
     $stmtEstoque = $PDO->prepare($sqlEstoque);
     $stmtEstoque->bindParam(':Id', $Id, PDO::PARAM_INT);
     $stmtEstoque->execute();
     $Estoque = $stmtEstoque->fetch(PDO::FETCH_ASSOC);
 
     if (!is_array($Estoque)) {
-        header('Location: ../msgErro.html');
+        header('Location: ../msg/msgErro.html');
         exit;
     }
 
-    if (!is_array($Produto)) {
-        header('Location: ../msgErro.html');
+    $sqlProdutos = "SELECT Id, Nome, Tipo FROM Produto ORDER BY Tipo ASC";
+    $stmtProdutos = $PDO->prepare($sqlProdutos);
+    $stmtProdutos->execute();
+    $Produtos = $stmtProdutos->fetchAll(PDO::FETCH_ASSOC);
+
+    if (!is_array($Produtos)) {
+        header('Location: ../msg/msgErro.html');
         exit;
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -60,13 +61,16 @@
     </div>
 
     <div class="container">
-        <form action="addEstoque.php" method="post">
+        <form action="editEstoque.php" method="post">
             <div class="form-group">
                 <label for="Produto">Selecione o produto:</label>
                 <select class="form-control" name="Produto" id="Produto" required>
-                    <?php while ($dados = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-                        <option value="<?php echo $dados['Id']; ?>"><?php echo $dados['Tipo'] . " - " . $dados['Nome']; ?></option>
-                    <?php endwhile; ?>
+                    <?php foreach ($Produtos as $produto): ?>
+                        <option value="<?php echo $produto['Id']; ?>"
+                            <?php echo ($produto['Id'] == $Estoque['IdProduto']) ? 'selected' : ''; ?>>
+                            <?php echo $produto['Tipo'] . " - " . $produto['Nome']; ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
 

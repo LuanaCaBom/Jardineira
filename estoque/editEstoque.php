@@ -13,10 +13,10 @@
     }
 
     $PDO = db_connect();
-    $sql = "UPDATE Estoque SET Localizacao = :Localizacao, Produto = :Produto, Quantidade = :Quantidade, Lote = :Lote WHERE Id = :Id";
+    $sql = "UPDATE Estoque SET Localizacao = :Localizacao, IdProduto = :IdProduto, Quantidade = :Quantidade, Lote = :Lote WHERE Id = :Id";
     $stmt = $PDO->prepare($sql);
     $stmt->bindParam(':Localizacao', $Localizacao);
-    $stmt->bindParam(':Produto', $Produto);
+    $stmt->bindParam(':IdProduto', $Produto);
     $stmt->bindParam(':Quantidade', $Quantidade);
     $stmt->bindParam(':Lote', $Lote);
     $stmt->bindParam(':Id', $Id, PDO::PARAM_INT);

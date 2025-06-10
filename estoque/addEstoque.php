@@ -12,12 +12,12 @@ if (empty($Produto) || empty($Lote) || empty($Quantidade) || empty($Localizacao)
 }
 
 $PDO = db_connect();
-$sql = "INSERT INTO Estoque (Localizacao, Quantidade, Lote, IdProduto) VALUES (:Localizacao, :Quantidade, :Lote, :Produto)";
+$sql = "INSERT INTO Estoque (Localizacao, Quantidade, Lote, IdProduto) VALUES (:Localizacao, :Quantidade, :Lote, :IdProduto)";
 $stmt = $PDO->prepare($sql);
 $stmt->bindParam(':Localizacao', $Localizacao);
 $stmt->bindParam(':Quantidade', $Quantidade);
 $stmt->bindParam(':Lote', $Lote);
-$stmt->bindParam(':Produto', $Produto);
+$stmt->bindParam(':IdProduto', $Produto);
 
 if ($stmt->execute()) {
     header('Location: ../msg/msgSucesso.html');
