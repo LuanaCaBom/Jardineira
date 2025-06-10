@@ -9,15 +9,25 @@
     }
 
     $PDO = db_connect();
-    $sql = "SELECT IdProduto, Localizacao, Quantidade, Lote FROM Produto 
-            INNER JOIN 
-            WHERE Id = :Id ORDER BY Tipo ASC";
+
+    $sql = "SELECT Id, Nome, Tipo FROM Produto WHERE Id = :Id ORDER BY Tipo ASC";
     $stmt = $PDO->prepare($sql);
     $stmt->bindParam(':Id', $Id, PDO::PARAM_INT);
     $stmt->execute();
-    $Estoque = $stmt->fetch(PDO::FETCH_ASSOC);
+    $Produto = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $sqlEstoque = "SELECT Id, Localizacao, Quantidade, Lote FROM Estoque WHERE Id = :Id";
+    $stmtEstoque = $PDO->prepare($sqlEstoque);
+    $stmtEstoque->bindParam(':Id', $Id, PDO::PARAM_INT);
+    $stmtEstoque->execute();
+    $Estoque = $stmtEstoque->fetch(PDO::FETCH_ASSOC);
 
     if (!is_array($Estoque)) {
+        header('Location: ../msgErro.html');
+        exit;
+    }
+
+    if (!is_array($Produto)) {
         header('Location: ../msgErro.html');
         exit;
     }
@@ -53,7 +63,7 @@
         <form action="addEstoque.php" method="post">
             <div class="form-group">
                 <label for="Produto">Selecione o produto:</label>
-                <select class="form-control" name="Produto" id="Produto" value="<?php echo $Estoque['Produto']; ?>" required>
+                <select class="form-control" name="Produto" id="Produto" required>
                     <?php while ($dados = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                         <option value="<?php echo $dados['Id']; ?>"><?php echo $dados['Tipo'] . " - " . $dados['Nome']; ?></option>
                     <?php endwhile; ?>
@@ -73,7 +83,7 @@
 
             <div class="form-group">
                 <label for="Localizacao">Localização:</label>
-                <input type="text" class="form-control" name="Localizacao" id="Localizacao" value="<?php echo $Cliente['Localizacao']; ?>">
+                <input type="text" class="form-control" name="Localizacao" id="Localizacao" value="<?php echo $Estoque['Localizacao']; ?>">
             </div>            
 
             <input type="hidden" name="Id" value="<?php echo $Id; ?>">
