@@ -49,6 +49,7 @@
                     <th scope="col">Nome</th>
                     <th scope="col">Valor</th>
                     <th scope="col">Tipo</th>
+                    <th scope="col">Opções</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,14 +58,14 @@
                     <th scope="row"><?php echo $dados['IdProduto']; ?></th>
                     <td><?php echo $dados['Nome']; ?></td>
                     <td><?php echo $dados['Valor']; ?></td>
-                    <td><?php echo $dados['Tipo']; ?></td>                    
+                    <td><?php echo $dados['Tipo']; ?></td>
+                    <td><a class="btn btn-danger" href="deletePedido.php?Id=<?php echo $dados['Id']; ?>" onclick="return confirm('Tem certeza de que deseja remover?');">Remover</a></td>                   
                 </tr>
                 <?php endwhile; ?>
             </tbody>
         </table>
         
-            <a class="btn btn-secondary" href="../compras/exibirCompras.php">Voltar</a>
-        
+        <a class="btn btn-secondary" href="../compras/exibirCompras.php">Voltar</a>
     </div>
 
 

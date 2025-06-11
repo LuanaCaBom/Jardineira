@@ -10,20 +10,21 @@ if (empty($Id)) {
 
 $PDO = db_connect();
 
-// Verificar se existe algum livro para esta sessão
-$sqlLivro = "SELECT COUNT(*) AS total FROM livro WHERE sessao_id = :id";
-$stmtLivro = $PDO->prepare($sqlLivro);
-$stmtLivro->bindParam(':id', $id, PDO::PARAM_INT);
-$stmtLivro->execute();
-$total = $stmtLivro->fetchColumn();
+// Verificar se existe algum pedido para esta compra
+$sqlPedido = "SELECT COUNT(*) AS total FROM Pedido WHERE IdCompra = :Id";
+$stmtPedido = $PDO->prepare($sqlPedido);
+$stmtPedido->bindParam(':Id', $Id, PDO::PARAM_INT);
+$stmtPedido->execute();
+$total = $stmtPedido->fetchColumn();
 
 if ($total > 0) {
     header('Location: ../msg/msgErro.html');
     exit;
+
 } else {
-    $sql = "DELETE FROM sessao WHERE id = :id";
+    $sql = "DELETE FROM Compra WHERE Id = :Id";
     $stmt = $PDO->prepare($sql);
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->bindParam(':Id', $Id, PDO::PARAM_INT);
     
     if ($stmt->execute()) {
         header('Location: ../msg/msgSucesso.html');
