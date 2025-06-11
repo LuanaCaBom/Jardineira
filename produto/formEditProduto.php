@@ -9,6 +9,7 @@
     }
 
     $PDO = db_connect();
+    
     $sqlProduto = "SELECT Id, Nome, Valor, Tipo FROM Produto WHERE Id = :Id";
     $stmtProduto = $PDO->prepare($sqlProduto);
     $stmtProduto->bindParam(':Id', $Id, PDO::PARAM_INT);
@@ -66,7 +67,7 @@
 
             <input type="hidden" name="Id" value="<?php echo $Id; ?>">
             <button type="submit" class="btn btn-primary">Enviar</button>
-            <a class="btn btn-danger" href="../index.html">Cancelar</a>
+            <a class="btn btn-danger" href="../produto/exibirProduto.php">Cancelar</a>
         </form>
     </div>
 

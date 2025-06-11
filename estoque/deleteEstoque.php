@@ -20,5 +20,4 @@
         header('Location: ../msg/msgErro.html');
     }
     exit;
-
 ?>

@@ -56,7 +56,7 @@
     
     <div class="container">
         <div class="jumbotron">
-            <p class="h3 text-center">Cadastrar Estoque</p>
+            <p class="h3 text-center">Editar Estoque</p>
         </div>
     </div>
 
@@ -79,7 +79,6 @@
                 <input type="number" class="form-control" name="Lote" id="Lote" value="<?php echo $Estoque['Lote']; ?>">
             </div>
 
-            <!-- Perguntar sobre essa quantidade: funcionamento dela na hora da compra -->
             <div class="form-group">
                 <label for="Quantidade">Quantidade:</label>
                 <input type="number" class="form-control" name="Quantidade" id="Quantidade" value="<?php echo $Estoque['Quantidade']; ?>">
@@ -92,7 +91,7 @@
 
             <input type="hidden" name="Id" value="<?php echo $Id; ?>">
             <button type="submit" class="btn btn-primary">Enviar</button>
-            <a class="btn btn-danger" href="../index.html">Cancelar</a>
+            <a class="btn btn-danger" href="../estoque/exibirEstoque.php">Cancelar</a>
         </form>
     </div>
 

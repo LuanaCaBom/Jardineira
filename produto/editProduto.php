@@ -12,6 +12,7 @@
     }
 
     $PDO = db_connect();
+    
     $sql = "UPDATE Produto SET Nome = :Nome, Valor = :Valor, Tipo = :Tipo WHERE Id = :Id";
     $stmt = $PDO->prepare($sql);
     $stmt->bindParam(':Nome', $Nome);

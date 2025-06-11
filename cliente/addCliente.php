@@ -1,20 +1,20 @@
 <?php
-require_once '../scripts/init.php';
+    require_once '../scripts/init.php';
 
-$Nome = isset($_POST['Nome']) ? $_POST['Nome'] : null;
-$Email = isset($_POST['Email']) ? $_POST['Email'] : null;
-$Endereco = isset($_POST['Endereco']) ? $_POST['Endereco'] : null;
-$Telefone = isset($_POST['Telefone']) ? $_POST['Telefone'] : null;
+    $Nome = isset($_POST['Nome']) ? $_POST['Nome'] : null;
+    $Email = isset($_POST['Email']) ? $_POST['Email'] : null;
+    $Endereco = isset($_POST['Endereco']) ? $_POST['Endereco'] : null;
+    $Telefone = isset($_POST['Telefone']) ? $_POST['Telefone'] : null;
 
-if (empty($Nome) || empty($Email) || empty($Endereco) || empty($Telefone)){
-    header('Location: ../msg/msgErro.html');
-    exit;
-}
+    if (empty($Nome) || empty($Email) || empty($Endereco) || empty($Telefone)){
+        header('Location: ../msg/msgErro.html');
+        exit;
+    }
 
     $PDO = db_connect();
+    
     $sql = "INSERT INTO Cliente (Nome, Email, Endereco, Telefone) VALUES (:Nome, :Email, :Endereco, :Telefone)";
     $stmt = $PDO->prepare($sql);
-
     $stmt->bindParam(':Nome', $Nome);
     $stmt->bindParam(':Email', $Email);
     $stmt->bindParam(':Endereco', $Endereco);
@@ -26,6 +26,4 @@ if (empty($Nome) || empty($Email) || empty($Endereco) || empty($Telefone)){
         header('Location: ../msg/msgErro.html');
     }
     exit;
-
-
 ?>

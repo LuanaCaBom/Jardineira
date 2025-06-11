@@ -9,6 +9,7 @@
     }
 
     $PDO = db_connect();
+    
     $sqlCliente = "SELECT Id, Nome, Email, Endereco, Telefone FROM Cliente WHERE Id = :Id";
     $stmtCliente = $PDO->prepare($sqlCliente);
     $stmtCliente->bindParam(':Id', $Id, PDO::PARAM_INT);
@@ -71,7 +72,7 @@
 
             <input type="hidden" name="Id" value="<?php echo $Id; ?>">
             <button type="submit" class="btn btn-primary">Enviar</button>
-            <a class="btn btn-danger" href="../index.html">Cancelar</a>
+            <a class="btn btn-danger" href="../cliente/exibirClientes.php">Cancelar</a>
         </form>
     </div>
 

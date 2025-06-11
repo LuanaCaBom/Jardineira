@@ -10,7 +10,7 @@
 
     $PDO = db_connect();
 
-    $sqlCompra = "SELECT C.Id, C.StatusPagamento, C.DataHora, C.IdCliente, Cl.Nome
+    $sqlCompra = "SELECT C.Id, C.IdCliente, C.DataHora, C.StatusPagamento, Cl.Nome
                    FROM Compra AS C 
                    INNER JOIN Cliente AS Cl ON C.IdCliente = Cl.Id 
                    WHERE C.Id = :Id";
@@ -91,8 +91,7 @@
             
             <input type="hidden" name="Id" value="<?php echo $Id; ?>">
             <button type="submit" class="btn btn-primary">Enviar</button>
-            <a class="btn btn-danger" href="../index.html">Cancelar</a>
-            <a class="btn btn-secondary" href="../compras/exibirCompras.php">Voltar</a>
+            <a class="btn btn-danger" href="../compras/exibirCompras.php">Cancelar</a>
         </form>
     </div>
 

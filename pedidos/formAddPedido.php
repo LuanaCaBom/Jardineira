@@ -1,17 +1,18 @@
 <?php
-require '../scripts/init.php';
+    require '../scripts/init.php';
 
-$IdCompra = isset($_GET['Id']) ? (int) $_GET['Id'] : null;
+    $IdCompra = isset($_GET['Id']) ? (int) $_GET['Id'] : null;
 
-if (empty($IdCompra)) {
-    header('Location: ../msg/msgErro.html');
-    exit;
-}
+    if (empty($IdCompra)) {
+        header('Location: ../msg/msgErro.html');
+        exit;
+    }
 
-$PDO = db_connect();
-$sqlProduto = "SELECT Id, Nome FROM Produto ORDER BY Nome ASC";
-$stmtProduto = $PDO->prepare($sqlProduto);
-$stmtProduto->execute();
+    $PDO = db_connect();
+    
+    $sqlProduto = "SELECT Id, Nome FROM Produto ORDER BY Nome ASC";
+    $stmtProduto = $PDO->prepare($sqlProduto);
+    $stmtProduto->execute();
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +54,7 @@ $stmtProduto->execute();
 
             <input type="hidden" name="IdCompra" value="<?php echo $IdCompra; ?>">
             <button type="submit" class="btn btn-primary">Enviar</button>
-            <a class="btn btn-danger" href="../index.html">Cancelar</a>
+            <a class="btn btn-danger" href="../compras/exibirCompras.php">Cancelar</a>
         </form>
     </div>
 

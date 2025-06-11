@@ -1,13 +1,14 @@
 <?php
-require_once '../scripts/init.php';
+    require_once '../scripts/init.php';
 
-$PDO = db_connect();
-$sql = "SELECT E.Id, E.Localizacao, P.Nome, E.Quantidade, E.Lote 
-        FROM Estoque AS E 
-        INNER JOIN Produto AS P ON E.IdProduto = P.Id 
-        ORDER BY E.Id DESC";
-$stmt = $PDO->prepare($sql);
-$stmt->execute();
+    $PDO = db_connect();
+
+    $sql = "SELECT E.Id, E.Localizacao, E.Quantidade, E.Lote, P.Nome
+            FROM Estoque AS E 
+            INNER JOIN Produto AS P ON E.IdProduto = P.Id 
+            ORDER BY E.Id ASC";
+    $stmt = $PDO->prepare($sql);
+    $stmt->execute();
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +33,7 @@ $stmt->execute();
 
     <div class="container">
         <div class="jumbotron">
-            <p class="h3 text-center">Estoque cadastrado</p>
+            <p class="h3 text-center">Estoque Cadastrado</p>
         </div>
     </div>
 

@@ -1,7 +1,6 @@
 <?php
     require_once '../scripts/init.php';
 
-
     $Id = isset($_GET['Id']) ? $_GET['Id'] : null;
 
     if (empty($Id)) {
@@ -21,6 +20,4 @@
         header('Location: ../msg/msgErro.html');
     }
     exit;
-    
-
 ?>

@@ -1,10 +1,11 @@
 <?php
-require_once '../scripts/init.php';
+    require_once '../scripts/init.php';
 
-$PDO = db_connect();
-$sql = "SELECT Id, Nome, Tipo FROM Produto ORDER BY Tipo ASC";
-$stmt = $PDO->prepare($sql);
-$stmt->execute();
+    $PDO = db_connect();
+
+    $sql = "SELECT Id, Nome, Tipo FROM Produto ORDER BY Tipo ASC";
+    $stmt = $PDO->prepare($sql);
+    $stmt->execute();
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +50,6 @@ $stmt->execute();
                 <input type="number" class="form-control" name="Lote" id="Lote">
             </div>
 
-            <!-- Perguntar sobre essa quantidade: funcionamento dela na hora da compra -->
             <div class="form-group">
                 <label for="Quantidade">Quantidade:</label>
                 <input type="number" class="form-control" name="Quantidade" id="Quantidade">

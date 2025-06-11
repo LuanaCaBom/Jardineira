@@ -4,9 +4,10 @@
     $Id = isset($_GET['Id']) ? $_GET['Id'] : null;
 
     $PDO = db_connect();
-    $sql = "SELECT P.Id, P.Nome, P.Valor, P.Tipo, Pe.Id, C.Id, Pe.IdProduto
-            FROM Produto AS P
-            INNER JOIN Pedido AS Pe ON P.Id = Pe.IdProduto
+
+    $sql = "SELECT Pe.Id, Pe.IdProduto, P.Id, P.Nome, P.Valor, P.Tipo, C.Id
+            FROM Pedido AS Pe
+            INNER JOIN Produto AS P ON P.Id = Pe.IdProduto
             INNER JOIN Compra AS C ON Pe.IdCompra = C.Id
             WHERE C.Id = $Id
             ORDER BY C.Id DESC";
@@ -37,7 +38,7 @@
 
     <div class="container">
         <div class="jumbotron">
-            <p class="h3 text-center">Pedidos cadastrados</p>
+            <p class="h3 text-center">Pedidos Cadastrados</p>
         </div>
     </div>
 
@@ -67,8 +68,6 @@
         
         <a class="btn btn-secondary" href="../compras/exibirCompras.php">Voltar</a>
     </div>
-
-
 
     <div class="container">
         <div class="card-footer">

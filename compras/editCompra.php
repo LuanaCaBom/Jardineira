@@ -20,7 +20,7 @@
     $stmt->bindParam(':Id', $Id, PDO::PARAM_INT);
 
     if ($stmt->execute()) {
-        header('Location: ../msg/msgSucesso.html');
+        header('Location: ../msg/msgSucessoCompra.html');
     } else {
         header('Location: ../msg/msgErro.html');
     }

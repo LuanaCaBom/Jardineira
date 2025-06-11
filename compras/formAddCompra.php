@@ -45,6 +45,7 @@ $stmt->execute();
                 <input class="form-check-input" type="radio" name="StatusPagamento" id="StatusPagamento" value="Sim">
                 <label class="form-check-label" for="StatusPagamento">Sim</label>
             </div>
+            
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="StatusPagamento" id="StatusPagamento" value="Não" checked>
                 <label class="form-check-label" for="StatusPagamento">Não</label>

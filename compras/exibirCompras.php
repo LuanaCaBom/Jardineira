@@ -1,13 +1,14 @@
 <?php
-require_once '../scripts/init.php';
+    require_once '../scripts/init.php';
 
-$PDO = db_connect();
-$sql = "SELECT C.Id, C.DataHora, C.StatusPagamento, Cl.Nome 
-        FROM Compra AS C 
-        INNER JOIN Cliente AS Cl ON C.IdCliente = Cl.Id 
-        ORDER BY C.Id ASC";
-$stmt = $PDO->prepare($sql);
-$stmt->execute();
+    $PDO = db_connect();
+
+    $sql = "SELECT C.Id, C.DataHora, C.StatusPagamento, Cl.Nome 
+            FROM Compra AS C 
+            INNER JOIN Cliente AS Cl ON C.IdCliente = Cl.Id 
+            ORDER BY C.Id ASC";
+    $stmt = $PDO->prepare($sql);
+    $stmt->execute();
 ?>
 
 <!DOCTYPE html>

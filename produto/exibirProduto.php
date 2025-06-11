@@ -1,12 +1,12 @@
 <?php
-require_once '../scripts/init.php';
+    require_once '../scripts/init.php';
 
-$PDO = db_connect();
-$sql = "SELECT P.Id, P.Nome, P.Valor, P.Tipo 
-        FROM Produto AS P";
-$stmt = $PDO->prepare($sql);
-$stmt->execute();
-
+    $PDO = db_connect();
+    
+    $sql = "SELECT P.Id, P.Nome, P.Valor, P.Tipo 
+            FROM Produto AS P";
+    $stmt = $PDO->prepare($sql);
+    $stmt->execute();
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ $stmt->execute();
 
     <div class="container">
         <div class="jumbotron">
-            <p class="h3 text-center">Produtos cadastrados</p>
+            <p class="h3 text-center">Produtos Cadastrados</p>
         </div>
     </div>
 
